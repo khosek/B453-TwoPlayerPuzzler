@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Rigidbody2D rb;
+    public Vector2 moveInput;
+    [SerializeField] int moveSpeed;
 
-    // Update is called once per frame
-    void Update()
+    public void FixedUpdate()
     {
-        
+        rb.velocity = moveInput.normalized * moveSpeed;
+    }
+    public void OnMoveInput(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
     }
 }
